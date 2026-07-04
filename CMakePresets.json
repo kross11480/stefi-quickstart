@@ -1,0 +1,52 @@
+{
+  "version": 5,
+  "configurePresets": [
+    {
+      "name": "stefi-debug",
+      "displayName": "STefi (NUCLEO-L476RG) Debug",
+      "binaryDir": "${sourceDir}/build/stefi-debug",
+      "toolchainFile": "${sourceDir}/cmake/toolchain-arm.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "STEFI_BOARD": "nucleo_l476"
+      }
+    },
+    {
+      "name": "stefi-release",
+      "displayName": "STefi (NUCLEO-L476RG) Release",
+      "binaryDir": "${sourceDir}/build/stefi-release",
+      "toolchainFile": "${sourceDir}/cmake/toolchain-arm.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "STEFI_BOARD": "nucleo_l476"
+      }
+    },
+    {
+      "name": "rohmi-debug",
+      "displayName": "Rohmi (NUCLEO-G431KB) Debug",
+      "binaryDir": "${sourceDir}/build/rohmi-debug",
+      "toolchainFile": "${sourceDir}/cmake/toolchain-arm.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "STEFI_BOARD": "rohmi_g431"
+      }
+    },
+    {
+      "name": "custom-g431-debug",
+      "displayName": "Custom baseboard (NUCLEO-G431KB) Debug",
+      "binaryDir": "${sourceDir}/build/custom-g431-debug",
+      "toolchainFile": "${sourceDir}/cmake/toolchain-arm.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "STEFI_BOARD": "rohmi_g431",
+        "APP_BOARD": "custom_g431"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "stefi-debug", "configurePreset": "stefi-debug" },
+    { "name": "stefi-release", "configurePreset": "stefi-release" },
+    { "name": "rohmi-debug", "configurePreset": "rohmi-debug" },
+    { "name": "custom-g431-debug", "configurePreset": "custom-g431-debug" }
+  ]
+}
