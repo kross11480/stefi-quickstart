@@ -10,6 +10,9 @@ endif()
 project(stefi_app C ASM)
 set(CMAKE_C_STANDARD 11)
 
+# compile_commands.json in the build dir, for editors/clangd.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Fetch stefi-lib at a pinned release. To develop against a local checkout
 # instead, configure with -DFETCHCONTENT_SOURCE_DIR_STEFI=/path/to/stefi-lib.
 include(FetchContent)
