@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      // Builds the active configure preset (picked in the status bar).
+      "type": "cmake",
+      "label": "build",
+      "command": "build",
+      "targets": ["app"],
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": "$gcc",
+      "detail": "Build app for the selected preset"
+    },
+    {
+      // Same as `cmake --build --preset <preset> --target flash`.
+      "type": "shell",
+      "label": "flash",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "${command:cmake.buildDirectory}",
+        "--target",
+        "flash"
+      ],
+      "problemMatcher": [],
+      "detail": "Program the board via the on-board ST-Link (OpenOCD)"
+    }
+  ]
+}

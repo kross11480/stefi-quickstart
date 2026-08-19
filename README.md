@@ -64,6 +64,46 @@ baseboard on NUCLEO-G431KB — see
 [docs/custom-board.md](docs/custom-board.md)). CLion and VS Code pick
 these up automatically.
 
+## VS Code
+
+Open the folder and accept the recommended extensions (CMake Tools,
+C/C++, Cortex-Debug, Serial Monitor — see `.vscode/extensions.json`);
+`arm-none-eabi-gcc` and `openocd` must be on your `PATH`.
+
+- Pick a preset in the CMake Tools status bar — the row along the
+  **bottom edge of the VS Code window**, showing the configure preset,
+  build preset and launch target. Clicking the configure-preset segment
+  opens the preset picker, a dropdown list at the top of the window with
+  the `displayName` of every preset in `CMakePresets.json`; type to
+  filter, Enter to select. The same picker is reachable from the CMake
+  sidebar or via *CMake: Select Configure Preset* in the Command Palette.
+  The build presets build the `app` target only, so stefi-lib components
+  the app doesn't link are never compiled; if you change the target in
+  the status bar, keep it on **app**.
+- **Ctrl/Cmd+Shift+B** builds. `Tasks: Run Task → flash` programs the
+  board.
+- **F5** starts a debug session — OpenOCD plus GDB via Cortex-Debug,
+  halting at `main`. Pick the launch configuration matching your preset:
+  *Debug (NUCLEO-G431KB)* for `rohmi-debug` / `custom-g431-debug`,
+  *Debug (NUCLEO-L476RG)* for `stefi-debug` / `stefi-release`.
+- The **XPERIPHERALS** view in the debug sidebar is wired up: both launch
+  configurations point `svdFile` at the SVD stefi-lib ships
+  (`configs/stm32g431.svd`, `configs/STM32L4x6.svd`), located through
+  `${command:cmake.buildDirectory}` so it follows the selected preset. No
+  SVD to download by hand.
+- IntelliSense comes from CMake Tools, so include paths and MCU flags
+  follow the selected preset — no `c_cpp_properties.json` to maintain.
+- `printf` output arrives on the ST-Link virtual COM port. Install the
+  recommended **Serial Monitor** extension
+  (`ms-vscode.vscode-serial-monitor`), then *View: Show Serial Monitor*
+  from the Command Palette — it opens as a tab in the bottom panel next
+  to TERMINAL. Pick the `usbmodem` port, set baud to **115200**, and
+  press **Start Monitoring**. Framing (8 data bits / no parity / 1 stop
+  bit), the LF line ending for what you send, and per-line timestamps are
+  preset in `.vscode/settings.json` — port and baud are chosen in the
+  panel and remembered per workspace. Outside VS Code,
+  `screen /dev/tty.usbmodem* 115200` works too.
+
 ## Adding a custom board
 
 A board with a different pinout — a breadboard, your own baseboard — is
