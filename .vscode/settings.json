@@ -9,6 +9,17 @@
   // configure/build preset and launch target are one click away.
   "cmake.options.statusBarVisibility": "visible",
 
+  // The app is an ARM Cortex-M ELF, so CMake Tools' Run (play) and Debug
+  // buttons can only fail: they launch the target on the *host*, which gives
+  // "zsh: exec format error". Hide them. Programming the board and on-chip
+  // debugging go through the `flash` task and F5 (Cortex-Debug) instead.
+  // The launch *target* picker stays visible, because launch.json resolves
+  // the ELF path through ${command:cmake.launchTargetPath}.
+  "cmake.options.advanced": {
+    "launch": { "statusBarVisibility": "hidden", "projectStatusVisibility": "hidden" },
+    "debug": { "statusBarVisibility": "hidden", "projectStatusVisibility": "hidden" }
+  },
+
   // IntelliSense gets its include paths and MCU flags from CMake Tools,
   // so no hand-maintained c_cpp_properties.json is needed.
   "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
@@ -16,6 +27,19 @@
   // Don't let cpptools fall back to the host clang for these sources.
   "C_Cpp.default.compilerPath": "arm-none-eabi-gcc",
   "C_Cpp.default.intelliSenseMode": "gcc-arm",
+
+  // If the "STM32Cube for VS Code" pack is installed, it activates in every
+  // folder and brings a *second* toolchain: its own clangd language server,
+  // its own CMake, a CMSIS pack sync and a bundles manager. This project is
+  // built with CMake Tools and debugged with Cortex-Debug, so those pieces
+  // find nothing they recognise and only log errors on every window reload
+  // ("Failed to find compilation database", "Failed to synchronize PDSC
+  // metadata: No such command 'pack'"). Switch them off for this folder;
+  // the pack stays fully usable in CubeIDE-generated projects.
+  "stm32cube-ide-clangd.enable": false,
+  "stm32cube-ide-clangd.detectExtensionConflicts": false,
+  "stm32cube-ide-core.synchronizePdscRepositoriesOnStartup": false,
+  "stm32cube-ide-core.enableOfflineMode": true,
 
   // Serial Monitor (ms-vscode.vscode-serial-monitor) reads printf output from
   // the ST-Link virtual COM port. stefi-lib drives USART2 at 115200 8N1 —

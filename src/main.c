@@ -20,6 +20,6 @@ void main(void) {
     led_init(LED_NUCLEO, OUTPUT);
     while (1) {
         led_toggle(LED_NUCLEO);
-        systick_delay_ms(100);
+        systick_delay_ms(500);
     }
 }
