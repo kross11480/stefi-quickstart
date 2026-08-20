@@ -1,0 +1,36 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      // Default. For the rohmi-debug / custom-g431-debug presets (NUCLEO-G431KB).
+      "name": "Debug (NUCLEO-G431KB)",
+      "type": "cortex-debug",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "executable": "${command:cmake.launchTargetPath}",
+      "servertype": "openocd",
+      "configFiles": ["board/st_nucleo_g4.cfg"],
+      "device": "STM32G431KB",
+      "runToEntryPoint": "main",
+      "preLaunchTask": "build",
+      // Peripheral register view. stefi-lib ships the SVDs, and CMake Tools
+      // expands ${command:cmake.buildDirectory} to the selected preset's
+      // binaryDir — so this resolves wherever FetchContent put the checkout.
+      "svdFile": "${command:cmake.buildDirectory}/_deps/stefi-src/configs/stm32g431.svd"
+    },
+    {
+      // For the stefi-debug / stefi-release presets (NUCLEO-L476RG).
+      "name": "Debug (NUCLEO-L476RG)",
+      "type": "cortex-debug",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "executable": "${command:cmake.launchTargetPath}",
+      "servertype": "openocd",
+      "configFiles": ["board/st_nucleo_l4.cfg"],
+      "device": "STM32L476RG",
+      "runToEntryPoint": "main",
+      "preLaunchTask": "build",
+      "svdFile": "${command:cmake.buildDirectory}/_deps/stefi-src/configs/STM32L4x6.svd"
+    }
+  ]
+}

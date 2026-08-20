@@ -1,0 +1,9 @@
+build/
+cmake-build-*/
+
+# Editor/tooling state — the shared .vscode/*.json files stay tracked.
+.vscode/ipch/
+.vscode/.cmaketools.json
+.cache/
+compile_commands.json
+.DS_Store

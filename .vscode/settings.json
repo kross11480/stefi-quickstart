@@ -1,0 +1,39 @@
+{
+  // Always drive the build from CMakePresets.json — the presets carry the
+  // cross toolchain and the STEFI_BOARD/APP_BOARD selection.
+  "cmake.useCMakePresets": "always",
+  "cmake.configureOnOpen": true,
+
+  // CMake Tools >=1.16 hides the status bar by default and puts the preset
+  // pickers in the CMake sidebar instead. Bring the status bar back so the
+  // configure/build preset and launch target are one click away.
+  "cmake.options.statusBarVisibility": "visible",
+
+  // IntelliSense gets its include paths and MCU flags from CMake Tools,
+  // so no hand-maintained c_cpp_properties.json is needed.
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+
+  // Don't let cpptools fall back to the host clang for these sources.
+  "C_Cpp.default.compilerPath": "arm-none-eabi-gcc",
+  "C_Cpp.default.intelliSenseMode": "gcc-arm",
+
+  // Serial Monitor (ms-vscode.vscode-serial-monitor) reads printf output from
+  // the ST-Link virtual COM port. stefi-lib drives USART2 at 115200 8N1 —
+  // see stefi-lib's src/uart.c: BRR is derived from the 16 MHz HSI16 kernel
+  // clock, and CR1 sets only UE/RE/TE, so 8 data bits, no parity, 1 stop bit.
+  "vscode-serial-monitor.dataBits": 8,
+  "vscode-serial-monitor.stopBits": 1,
+  "vscode-serial-monitor.parity": "none",
+
+  // Appended to lines you type *to* the board in the monitor's input box.
+  "vscode-serial-monitor.lineEnding": "\n",
+
+  // Timestamp each received line — strftime syntax (%H hour, %M minute,
+  // %S second, %L milliseconds). Handy for checking blink intervals.
+  "vscode-serial-monitor.timestampFormat": "%H:%M:%S.%L",
+  "vscode-serial-monitor.timestampSeparator": " | ",
+
+  "files.associations": {
+    "*.h": "c"
+  }
+}

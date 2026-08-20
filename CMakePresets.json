@@ -44,9 +44,9 @@
     }
   ],
   "buildPresets": [
-    { "name": "stefi-debug", "configurePreset": "stefi-debug" },
-    { "name": "stefi-release", "configurePreset": "stefi-release" },
-    { "name": "rohmi-debug", "configurePreset": "rohmi-debug" },
-    { "name": "custom-g431-debug", "configurePreset": "custom-g431-debug" }
+    { "name": "stefi-debug", "configurePreset": "stefi-debug", "targets": ["app"] },
+    { "name": "stefi-release", "configurePreset": "stefi-release", "targets": ["app"] },
+    { "name": "rohmi-debug", "configurePreset": "rohmi-debug", "targets": ["app"] },
+    { "name": "custom-g431-debug", "configurePreset": "custom-g431-debug", "targets": ["app"] }
   ]
 }
