@@ -5,6 +5,22 @@ extensions, build and flash tasks, two debug configurations and the
 IntelliSense/Serial Monitor settings. Nothing in there is generated, and
 nothing has to be regenerated after a `git pull`.
 
+| Task | How |
+| --- | --- |
+| Choose a preset | CMake Tools status bar, along the bottom edge |
+| Build | **Ctrl/Cmd+Shift+B** (target `app`) |
+| Flash | *Tasks: Run Task → flash* |
+| Debug | **F5**, launch config matching your preset |
+| Peripheral registers | **XPERIPHERALS** in the debug sidebar |
+| `printf` output | *View: Show Serial Monitor*, `usbmodem` port, 115200 |
+
+## Getting the code
+
+No terminal needed: **Ctrl/Cmd+Shift+P** → *Git: Clone*, paste
+`https://github.com/kross11480/stefi-quickstart`, choose a folder, and
+open it when VS Code offers. The Welcome page's *Clone Git Repository…*
+link does the same.
+
 ## Setup
 
 Open the folder and accept the recommended extensions (CMake Tools,
